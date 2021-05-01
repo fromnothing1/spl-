@@ -1,0 +1,30 @@
+
+select '00700' 결과1, 00700 결과2 from dual;
+
+-- 더하면 내부변환 숫자로 처리함
+select '123' + 123  from dual;
+
+-- select 'acv' + 123  from dual; 문자로 하면 에러남
+
+select sysdate from dual;
+-- to_char
+select sysdate, to_char(sysdate,'day'),to_char(sysdate,'q-ddd') from dual;
+
+select 1234567 from dual;
+-- 9 숫자 없으면 공백 , 0 숫자 없어면 0으로 채움
+select to_char(1234567,'999,999,999')  from dual;
+select to_char(1234567,'000,000,000')  from dual;
+-- to_date 사용시 default 값은 (년,월)sysdate의 값을 넣는다 .  (시,분,초) = 0 기본값
+
+select '12', to_date('12','yy') from dual;
+
+select '12', to_date('12','dd') from dual;
+
+-- to_number()
+
+select '123132', to_number('123132') from dual;
+
+
+
+
+
