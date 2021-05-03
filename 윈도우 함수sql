@@ -1,0 +1,44 @@
+-- 윈도우 함수 == 분석함수 
+
+-- OVER(partition by(단독사용가능)  ~~~~ order by(단독사용가능) ~~~~ rows(order by  와 함께 사용)) ~~~~
+--partition ~= group by , 
+-- sql 처리 순서 
+-- joins-where-groub by-having- 윈도우 함수 - order by
+
+-- 윈도우 함수 종류 
+--1.  RANK()  동일한 값은 동일한 순서 , 동일한 순위의 수만큼 다음 순위는 건너뜀
+--2.  DENSE_RANK() 동일 순위의 수 만큼 다음 순위를 건너 뛰지 않음
+
+select ename, sal,deptno, rank() over(order by sal desc) from emp;
+select ename, sal,deptno, dense_rank() over(order by sal desc) from emp;
+select ename, sal,deptno, rank() over(partition by deptno order by sal desc) from emp;
+
+-- row_number : index 만들어 주는 함수, 순번 매겨 주는 함수라고 생각해도 됨 
+
+select ename, sal, row_number() over(order by sal desc) from emp;
+select ename, sal, row_number() over(order by sal desc,ename) from emp;
+
+--ntile(n) : n개의 그룹을 생성, 만약 나눠지지 않는 다면 1 그룹 부터 1명씩 추가 한다.
+
+select ename,sal, ntile(3) over(order by sal) from emp;
+
+--sum ,max ,avg
+
+select ename, deptno,sal, sum(sal) over() "total_sum",sum(sal) over(partition by deptno) "dept_sum" 
+from emp;
+
+-- rows 줄 범위 지정 
+-- lag(컬럼,줄수 앞,앞줄 없을때) 앞에 있는거 끌어 내릴때 
+-- lead (컬럼,줄수 앞,앞줄 없을때)뒤에 있는거 끌어 올릴때
+--       sum(sal) over(order by sal rows between 1 preceding and 1 following) "sum" 
+select ename,deptno ,sal , sum(sal) over(order by ename rows between 1 preceding and 1 following) "sum", --  위아래 줄 합계 
+                           sum(sal) over(order by ename rows unbounded preceding) "unbounded_sum_preceding"  -- 누적 합계
+from emp;
+    
+select ename,deptno ,sal , lag(sal,1,0) over(order by sal)  from emp;
+select ename,deptno ,sal , lead(sal,1,0) over(order by sal)  from emp;
+
+
+
+
+

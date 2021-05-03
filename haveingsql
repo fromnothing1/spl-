@@ -1,0 +1,10 @@
+-- having groub by 절에 조건을 더하고 싶을때 where 절은 사용할수 없다.
+
+select team_id,avg(height) from player group by team_id;
+select team_id,avg(height) from player 
+group by team_id having avg(height) > 180;
+
+select team_id,avg(height) from player group by team_id;
+select team_id,avg(height) from player 
+where height > 180 -- 이렇게 쓰면 180 넘는 값들을 group by 하고 having  해준다.
+group by team_id having avg(height) > 180 order by team_id;

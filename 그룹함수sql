@@ -1,0 +1,22 @@
+-- count(*),sum,avg,max,min,stddev():표준편차,varance:분산 
+--count(*): null 값 포함한 갯수 count(표현식)널값 안포함 
+--
+--그룹함수 사용지침 
+--
+--distinct 지정하면 함수는 중복되지 않은 값만 검토 all을 지정하면 중복값 또한 포함
+--all 은 별도로 지정 할 필요 없음
+--모든 데이터 타입에 min,max,count 함수 사용가능
+--avg,sum,varlance,stddev 는 숫자 데이터에만 사용가능
+
+select trunc(avg(sal)),max(sal),min(sal),sum(sal) from emp;
+
+select count(*),count(mgr),count(comm) from emp;
+
+select avg(comm),trunc(avg(nvl(comm,0))) from emp;
+
+-- grop by 절 그룹 묶을수 있음
+
+select deptno,trunc(avg(sal)) from emp group by deptno order by deptno;
+select job,deptno, count(*),avg(sal),sum(sal) from emp group by job,deptno order by job;
+select job,deptno from emp group by job,deptno order by job;
+

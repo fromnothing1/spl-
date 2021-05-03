@@ -1,0 +1,77 @@
+
+select 문 
+
+select player_name,position from player;
+select ename,sal,sal*3 from emp;
+
+컬럼 별칭(alias)
+
+select ename 이름,sla 급여 from emp;
+별칭 시 "asdf" " 있어야지 대소문자 구분해줌
+default 값은 모두 대문자로 인식 
+
+연결 연산자 ||
+
+select ename || job from emp;
+2 개의 컬럼이 합처진다 .
+
+중복제거 distinct
+
+
+--column & row 
+
+select player_name,position from player;
+select ename,sal,sal*3 from emp;
+
+select ename  이름 , sal  급여 from emp;
+select ename || job from emp;
+
+select deptno from emp;
+select DISTINCT deptno from emp;
+select DISTINCT deptno,job from emp;  
+
+-- where 절 ( 조건절 연습)
+-- <>,!=,^= : 같지않음 
+-- = 같음
+
+select player_name, team_id,position from player
+where position = 'MF';
+ 
+select ename,sal,deptno from emp where sal > 3000;
+ 
+ -- between a and b 
+ 
+select player_name,team_id,weight from player
+where weight between 80 and 90;
+-- a and b  항상 a>b
+
+-- in : 값이 같은지 판단하는 연산자 
+
+select player_name ,e_player_name , position from player where position in('GK','MF','TC');
+
+-- like  특정 문자열 포함 하는 데이터 추출 
+-- % 0개 문자 또는 1개 이상의 문자열이 올수 있음 
+-- _ 반드시 1개의 문자가 있어야함 
+
+select player_name,position from player where player_name LIKE '김%';
+select player_name,position from player where player_name LIKE '김_';
+
+-- is null 값이 없는 데이터 출력  
+
+select ename,sal,comm from emp where comm is null;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
